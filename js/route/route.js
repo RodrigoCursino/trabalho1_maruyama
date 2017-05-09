@@ -15,13 +15,13 @@ angular.module("trabalhoApp").config(["$routeProvider", function($routeProvider)
     // listar alunos
     $routeProvider.when("/listagemAluno",{
         templateUrl:"view/listar_alunos.html",
+        controller:"AlunoController",
     });
 
     // listar alunos
     $routeProvider.when("/listarDisciplina",{
         templateUrl:"view/listar_disciplina.html",
         controller:"DisciplinaController",
-        controller:"AlunoController"
     });
 
     // cadastro Curso

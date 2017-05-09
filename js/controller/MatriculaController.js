@@ -7,8 +7,9 @@ angular.module("trabalhoApp").controller("MatriculaController", function ($scope
     $scope.cursos = [];
     $scope.alunos = [];
     $scope.matriculados = [];
-    $scope.alunosMatricular = [];
     $scope.semestres = [];
+    $scope.alunosMatricular = [];
+    $scope.alunosParaCadastro = [];
     $scope.tamanhoVetorCurso;
 
 
@@ -27,14 +28,11 @@ angular.module("trabalhoApp").controller("MatriculaController", function ($scope
         AppTrabalhoService.listarCursos(1,2000).then(sucesso,erro);
     }
 
-    $scope.matricular = function (aluno) {
-        $scope.alunosMatricular.pop();
-    }
 
-
-    // chamdo do form ce curso na view matricula
+    // chamando do form ce curso na view matricula
     $scope.listarDisciplinasPorCurso = function (curso) {
 
+        alert(curso);
         var sucesso = function (dados) {
             $scope.disciplinas = dados.data;
         };
@@ -88,6 +86,56 @@ angular.module("trabalhoApp").controller("MatriculaController", function ($scope
         };
 
         AppTrabalhoService.listarMatriculados(semestre,disciplina).then(sucesso,erro);
+
+    }
+
+    //matriculando alunos
+    $scope.matricular = function (disciplina, semestre) {
+        for (var i = 0; i < $scope.alunosMatricular.length; i++) {
+            $scope.alunosParaCadastro.push($scope.alunosMatricular[i]);
+        }
+    }
+
+    $scope.marcado = function (alunoCheck) {
+        return $scope.alunosMatricular.indexOf(alunoCheck) > -1;
+    }
+
+    $scope.checkBox = function (aluno) {
+        var index = $scope.alunosMatricular.indexOf(aluno);
+
+        if (index > -1) {
+            $scope.alunosMatricular.splice(index,1);
+        } else {
+            $scope.alunosMatricular.push(aluno);
+        }
+    }
+
+    $scope.vetorCadastro = [];
+    $scope.cadastrarAluno = function (disciplina, semestre) {
+
+        alert (disciplina+" "+semestre);
+        $scope.vetorCadastro = [];
+        for (var i = 0; i < $scope.alunosParaCadastro.length; i++) {
+
+            var referencias = {};
+
+                        referencias.DisciplinaId =  disciplina.id,
+                        referencias.AlunoId = $scope.alunosParaCadastro[i].id,
+                        referencias.SemestreId =  semestre.id
+
+
+            $scope.vetorCadastro.push(referencias)
+        }
+
+        var sucesso = function () {
+            alert("Sucess ao Matricular");
+        };
+
+        var erro = function (err) {
+            alert("Erro ao Matricular");
+        };
+
+        AppTrabalhoService.matricularAlunos($scope.vetorCadastro).then(sucesso,erro);
 
     }
 

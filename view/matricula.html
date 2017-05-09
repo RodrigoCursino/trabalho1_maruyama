@@ -31,7 +31,7 @@
             <tr  ng-repeat="aluno in alunos">
                 <td>{{aluno.id}}</td>
                 <td>{{aluno.nome}}</td>
-                <td><input type="checkbox" value="{{aluno}}" ng-click="matricular(aluno)"></td>
+                <td><input type="checkbox" ng-model="alunosMatricular" ng-checked="marcado(aluno)" ng-click="checkBox(aluno)"></td>
             </tr>
             </tbody>
         </table>
@@ -40,9 +40,11 @@
 
     <!-- botão -->
     <section class="col-lg-2 matricula">
-            <button class="btn btn-primary" ng-disabled="!semestre" style="margin-left: 18%; margin-top: 40%" >Adicionar <span class="glyphicon glyphicon-share-alt"></span></button>
-            <button class="btn btn-success" ng-disabled="!semestre" style="margin-left: 24%; margin-top: 15%">cadastrar</button>
+            <button class="btn btn-primary" ng-disabled="!semestre" style="margin-left: 18%; margin-top: 40%" ng-click="matricular(alunosMatricular)" >Adicionar <span class="glyphicon glyphicon-share-alt"></span></button>
+
+            <button class="btn btn-success" ng-disabled="!semestre" style="margin-left: 24%; margin-top: 15%" ng-click="cadastrarAluno(semestre,disciplina)">cadastrar</button>
     </section>
+
 
     <section class="col-lg-5">
 
@@ -92,9 +94,9 @@
                 </tr>
 
                 <!-- não matriculados -->
-                <tr ng-repeat="alunosMatriculados in alunosMatricular">
-                    <td>{{alunosMatriculados.id}}</td>
-                    <td>{{alunosMatriculados.nome}}</td>
+                <tr ng-repeat="al in alunosParaCadastro">
+                    <td>{{al.id}}</td>
+                    <td>{{al.nome}}</td>
                 </tr>
 
             </tbody>

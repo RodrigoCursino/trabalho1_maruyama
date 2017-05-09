@@ -46,7 +46,7 @@ angular.module("trabalhoApp").factory("AppTrabalhoService",
               };
 
               // listar alunos
-              var _listarAlunos = function (pag, num) {
+              var _listagemAlunos = function (pag, num) {
                   return $http({
                       method: "GET",
                       url: "http://siscadcpwiv.herokuapp.com/aluno/list/"+pag+"/"+num,
@@ -83,6 +83,14 @@ angular.module("trabalhoApp").factory("AppTrabalhoService",
                   })
               }
 
+              var _matricularAlunos = function (dados) {
+                  return $http ({
+                      method:"POST",
+                      url: "http://siscadcpwiv.herokuapp.com/matricula/",
+                      data: dados
+                  })
+              }
+
               return {
                   // cadstro curso
                   salvarCurso: _salvarCurso,
@@ -93,12 +101,15 @@ angular.module("trabalhoApp").factory("AppTrabalhoService",
 
                   // listagem
                   listarCursos: _listarCursos,
-                  listarAlunos: _listarAlunos,
+                  listagemAlunos: _listagemAlunos,
                   listarAlunoPorCurso: _listarAlunosPorCurso,
                   listarDisciplinas: _listarDisciplinas,
                   listarDisciplinaPorCurso: _listarDisciplinaPorCurso,
                   listarSemestres : _listarSemestre,
                   listarMatriculados : _listarMatriculados,
+
+                  // matricular aluno
+                  matricularAlunos: _matricularAlunos
                 }
 
           });

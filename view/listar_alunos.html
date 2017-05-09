@@ -15,13 +15,13 @@
         <div class="form-group">
             <label class="control-label col-lg-1">Curso</label>
             <div class="col-lg-9">
-                <select class="form-control" name="curso" ng-model="c.cursoId">
+                <select class="form-control" name="curso" ng-model="curso">
                     <option ng-repeat="curso in cursos" value="{{curso.id}}">{{curso.nome}}</option>
                 </select>
             </div>
 
             <div class="col-lg-2">
-                <button ng-click="listarDisciplinasPorCurso(c)" class="btn btn-sm btn-success pull-right">Listar</button>
+                <button ng-click="listarAlunosPorCurso(curso)" class="btn btn-sm btn-success pull-right">Listar</button>
             </div>
         </div>
 

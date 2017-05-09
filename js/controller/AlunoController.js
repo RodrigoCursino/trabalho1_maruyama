@@ -39,7 +39,7 @@ angular.module("trabalhoApp").controller("AlunoController", function($scope, App
         };
 
 
-        AppTrabalhoService.listarAlunos($scope.pag,$scope.num).then(sucesso,erro);
+        AppTrabalhoService.listagemAlunos($scope.pag,$scope.num).then(sucesso,erro);
     };
 
     $scope.voltar = function () {
@@ -58,7 +58,7 @@ angular.module("trabalhoApp").controller("AlunoController", function($scope, App
         };
 
 
-        AppTrabalhoService.listarAlunos($scope.pag,$scope.num).then(sucesso,erro);
+        AppTrabalhoService.listagemAlunos($scope.pag,$scope.num).then(sucesso,erro);
     };
 
     // listar alunos por curso
@@ -73,7 +73,7 @@ angular.module("trabalhoApp").controller("AlunoController", function($scope, App
             alert("Erro Paginar");
         };
 
-        AppTrabalhoService.listarAlunoPorCurso(c.cursoId).then(sucesso,erro);
+        AppTrabalhoService.listarAlunoPorCurso(c).then(sucesso,erro);
 
     }
 
@@ -91,7 +91,7 @@ angular.module("trabalhoApp").controller("AlunoController", function($scope, App
     }
 
     // listar alunos
-    $scope.listarAlunos = function (pag,num) {
+    $scope.listarAlunos = function (pag ,num) {
 
         var sucesso = function (dados) {
             $scope.alunos = dados.data;
@@ -101,9 +101,10 @@ angular.module("trabalhoApp").controller("AlunoController", function($scope, App
             alert("Erro listar Alunos");
         }
 
-        AppTrabalhoService.listarAlunos(pag,num).then(sucesso,erro);
+        AppTrabalhoService.listagemAlunos(pag,num).then(sucesso,erro);
     }
 
+    $scope.listarCursos(1,2000);
     $scope.listarCursos(1,2000);
     $scope.listarAlunos($scope.pag,$scope.num);
 
