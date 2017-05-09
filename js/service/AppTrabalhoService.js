@@ -69,6 +69,20 @@ angular.module("trabalhoApp").factory("AppTrabalhoService",
                   });
               }
 
+              var _listarSemestre = function () {
+                  return $http ({
+                      method:"GET",
+                      url:"http://siscadcpwiv.herokuapp.com/semestre/list",
+                  })
+              }
+
+              var _listarMatriculados = function (semestre,disciplina) {
+                  return $http ({
+                      method:"GET",
+                      url:"http://siscadcpwiv.herokuapp.com/matricula/semestre/disciplina/"+semestre+"/"+disciplina,
+                  })
+              }
+
               return {
                   // cadstro curso
                   salvarCurso: _salvarCurso,
@@ -82,7 +96,9 @@ angular.module("trabalhoApp").factory("AppTrabalhoService",
                   listarAlunos: _listarAlunos,
                   listarAlunoPorCurso: _listarAlunosPorCurso,
                   listarDisciplinas: _listarDisciplinas,
-                  listarDisciplinaPorCurso: _listarDisciplinaPorCurso
+                  listarDisciplinaPorCurso: _listarDisciplinaPorCurso,
+                  listarSemestres : _listarSemestre,
+                  listarMatriculados : _listarMatriculados,
                 }
 
           });
