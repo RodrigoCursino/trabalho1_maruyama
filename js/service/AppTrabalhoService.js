@@ -83,13 +83,13 @@ angular.module("trabalhoApp").factory("AppTrabalhoService",
                   })
               }
 
-              var _matricularAlunos = function (dados) {
-                  return $http ({
+              var _salvarMatriculas = function (dados) {
+                  return $http({
                       method:"POST",
-                      url: "http://siscadcpwiv.herokuapp.com/matricula/",
-                      data: dados
-                  })
-              }
+                      url:"http://siscadcpwiv.herokuapp.com/matricula/",
+                      data:dados
+                  });
+              };
 
               return {
                   // cadstro curso
@@ -109,7 +109,7 @@ angular.module("trabalhoApp").factory("AppTrabalhoService",
                   listarMatriculados : _listarMatriculados,
 
                   // matricular aluno
-                  matricularAlunos: _matricularAlunos
+                  salvarMatriculas: _salvarMatriculas
                 }
 
           });

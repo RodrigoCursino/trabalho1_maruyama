@@ -90,7 +90,8 @@ angular.module("trabalhoApp").controller("MatriculaController", function ($scope
     }
 
     //matriculando alunos
-    $scope.matricular = function (disciplina, semestre) {
+    $scope.matricular = function () {
+        $scope.alunosParaCadastro = [];
         for (var i = 0; i < $scope.alunosMatricular.length; i++) {
             $scope.alunosParaCadastro.push($scope.alunosMatricular[i]);
         }
@@ -108,36 +109,36 @@ angular.module("trabalhoApp").controller("MatriculaController", function ($scope
         } else {
             $scope.alunosMatricular.push(aluno);
         }
-    }
+    };
 
-    $scope.vetorCadastro = [];
+
     $scope.cadastrarAluno = function (disciplina, semestre) {
 
-        alert (disciplina+" "+semestre);
+        alert (disciplina + " " + semestre);
+
         $scope.vetorCadastro = [];
+
         for (var i = 0; i < $scope.alunosParaCadastro.length; i++) {
+            var referencia = {};
 
-            var referencias = {};
+                referencia.DisciplinaId = disciplina,
+                referencia.AlunoId = $scope.alunosParaCadastro[i].id,
+                referencia.SemestreId = semestre
 
-                        referencias.DisciplinaId =  disciplina.id,
-                        referencias.AlunoId = $scope.alunosParaCadastro[i].id,
-                        referencias.SemestreId =  semestre.id
-
-
-            $scope.vetorCadastro.push(referencias)
+            $scope.vetorCadastro.push(referencia);
         }
 
         var sucesso = function () {
-            alert("Sucess ao Matricular");
+            alert("Sucesso ao Matricular");
+
         };
 
-        var erro = function (err) {
-            alert("Erro ao Matricular");
+        var erro = function () {
+            alert("Erro de listagem");
         };
 
-        AppTrabalhoService.matricularAlunos($scope.vetorCadastro).then(sucesso,erro);
-
-    }
+        AppTrabalhoService.salvarMatriculas($scope.vetorCadastro).then(sucesso,erro);
+    };
 
     listarCursos ();
 });
