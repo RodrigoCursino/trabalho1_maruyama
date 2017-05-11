@@ -32,7 +32,7 @@ angular.module("trabalhoApp").controller("MatriculaController", function ($scope
     // chamando do form ce curso na view matricula
     $scope.listarDisciplinasPorCurso = function (curso) {
 
-        alert(curso);
+        //alert(curso);
         var sucesso = function (dados) {
             $scope.disciplinas = dados.data;
         };
@@ -114,7 +114,7 @@ angular.module("trabalhoApp").controller("MatriculaController", function ($scope
 
     $scope.cadastrarAluno = function (disciplina, semestre) {
 
-        alert (disciplina + " " + semestre);
+        //alert (disciplina + " " + semestre);
 
         $scope.vetorCadastro = [];
 
@@ -130,6 +130,7 @@ angular.module("trabalhoApp").controller("MatriculaController", function ($scope
 
         var sucesso = function () {
             alert("Sucesso ao Matricular");
+            $location.url("/");
 
         };
 
